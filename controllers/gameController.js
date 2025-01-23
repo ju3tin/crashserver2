@@ -30,7 +30,7 @@ const startGame = async (wss) => {
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {
         client.send(JSON.stringify({ action: 'COUNTDOWN', time: countdown, data: countdown, seconds: countdown }));
-        client.send(JSON.stringify({action: 'SECOND_BEFORE_START', data: countdown}));
+        client.send(JSON.stringify({action: 'SECOND_BEFORE_START', data: countdown }));
       }
     });
 
