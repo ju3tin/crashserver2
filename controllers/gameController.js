@@ -5,8 +5,13 @@ const { generateCrashMultiplier } = require('../utils/gameUtils');
 let currentMultiplier = 1.0;
 let isRunning = false;
 let gameState = 'waiting';
+const DELAY_PER_DELTA_MULT = 0.002;
 
-const GAME_INTERVAL = 1000;
+const GAME_INTERVAL = 50;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const startGame = async (wss) => {
   gameState = 'waiting';
@@ -58,7 +63,7 @@ const startGame = async (wss) => {
     await gameRound.save();
 
     const interval = setInterval(async () => {
-      currentMultiplier += 0.1;
+      currentMultiplier += 0.01;
 
       wss.clients.forEach((client) => {
         if (client.readyState === 1) {

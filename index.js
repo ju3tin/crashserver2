@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./utils/db');
 const GameController = require('./controllers/gameController');
 const UserController = require('./controllers/userController');
+const clients = new Map(); // To track individual player states
 
 dotenv.config();
 connectDB();
