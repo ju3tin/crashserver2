@@ -29,7 +29,7 @@ const startGame = async (wss) => {
   const countdownInterval = setInterval(() => {
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {
-        client.send(JSON.stringify({ action: 'COUNTDOWN', seconds: countdown }));
+        client.send(JSON.stringify({ action: 'COUNTDOWN', data: countdown, seconds: countdown }));
       }
     });
 
@@ -61,7 +61,7 @@ const startGame = async (wss) => {
 
       wss.clients.forEach((client) => {
         if (client.readyState === 1) {
-          client.send(JSON.stringify({ action: 'CNT_MULTIPLY', multiplier: currentMultiplier.toFixed(2) }));
+          client.send(JSON.stringify({ action: 'CNT_MULTIPLY', data: currentMultiplier.toFixed(2), multiplier: currentMultiplier.toFixed(2) }));
         }
       });
 
@@ -81,7 +81,7 @@ const endGame = async (wss, gameRoundId) => {
 
   wss.clients.forEach((client) => {
     if (client.readyState === 1) {
-      client.send(JSON.stringify({ action: 'ROUND_CRASHED', multiplier: currentMultiplier.toFixed(2) }));
+      client.send(JSON.stringify({ action: 'ROUND_CRASHED', data: currentMultiplier.toFixed(2), multiplier: currentMultiplier.toFixed(2) }));
     }
   });
 
